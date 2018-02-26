@@ -1,1 +1,1 @@
-web: gunicorn ash_autograder:ash_autograder
+web: gunicorn ash_autograder:app
