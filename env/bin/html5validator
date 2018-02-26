@@ -1,0 +1,10 @@
+#!/mnt/c/Users/Ashirvad/Desktop/Tutoring/ash-autograder/ash-autograder/env/bin/python3
+# EASY-INSTALL-ENTRY-SCRIPT: 'html5validator==0.2.8','console_scripts','html5validator'
+__requires__ = 'html5validator==0.2.8'
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.exit(
+        load_entry_point('html5validator==0.2.8', 'console_scripts', 'html5validator')()
+    )
