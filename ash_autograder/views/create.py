@@ -48,8 +48,10 @@ def username_exists(username):
 	user = get_user(username)
 	return user != None
 
-def create_account(username, fullname, email, file, password):
+def create_account(username, fullname, email, file, password, password2):
 	"""Create Account."""
+	if password != password2:
+		return flask.render_template('create.html')
 	if username_exists(username):
 		return flask.render_template('create.html')
 	database = get_db()
@@ -79,7 +81,8 @@ def show_create():
 								request.form['fullname'],
 								request.form['email'],
 								request.files['file'],
-								request.form['password'])
+								request.form['password'],
+								request.form['password2'])
 
 	#if already logged, go to edit page
 
