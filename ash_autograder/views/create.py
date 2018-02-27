@@ -8,6 +8,7 @@ from flask import session, redirect, url_for, request
 import ash_autograder
 from ash_autograder.model import get_db
 from ash_autograder.config import UPLOAD_FOLDER
+from ash_autograder.views.globals import get_user
 
 def sha256sum(filename):
 	"""Return sha256 hash of file content, similar to UNIX sha256sum."""
@@ -42,8 +43,15 @@ def upload_file(temp_file):
 
 	return hash_filename
 
+def username_exists(username):
+	"""Return true if username exists."""
+	user = get_user(username)
+	return user != None
+
 def create_account(username, fullname, email, file, password):
 	"""Create Account."""
+	if username_exists(username):
+		return flask.render_template('create.html')
 	database = get_db()
 	cursor = database.cursor()
 	hash_password = hash_new_pass(password)
