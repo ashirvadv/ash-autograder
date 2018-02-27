@@ -16,7 +16,8 @@ CREATE TABLE projects(
 
 CREATE TABLE submissions(
 	submissionid INTEGER PRIMARY KEY AUTOINCREMENT,
-	filename VARCHAR(64) NOT NULL,
+	filename_code VARCHAR(64) NOT NULL,
+	filename_report VARCHAR(64) NOT NULL,
 	owner VARCHAR(20) NOT NULL,
 	created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	FOREIGN KEY (owner) REFERENCES users(username)
