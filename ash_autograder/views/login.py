@@ -8,7 +8,7 @@ def user_not_exist(user):
 	return user is None
 
 def password_not_match(correct, input):
-	return correct is not input
+	return correct != input
 
 def find_salt(password):
     """Find salt."""
@@ -47,10 +47,10 @@ def login(username, password):
 def show_login():
 	"""Display login page."""
 
-	if request.method is 'POST':
-		return login(request.form['username'], request.form['password'])
-	
 	if logged_in():
 		return redirect(url_for('show_index'))
+
+	if request.method == 'POST':
+		return login(request.form['username'], request.form['password'])
 
 	return flask.render_template('login.html')
