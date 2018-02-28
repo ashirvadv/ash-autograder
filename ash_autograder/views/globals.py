@@ -35,3 +35,7 @@ def form_file_name(project_num, submission_num):
 	filename += '_submission_' + str(submission_num)
 	filename += '.txt'
 	return filename
+
+def is_admin():
+	"""Return true if admin is logged in."""
+	return session['username'] == 'admin'

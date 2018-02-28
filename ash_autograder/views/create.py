@@ -57,6 +57,8 @@ def create_account(username, fullname, email, file, password, password2):
 	database = get_db()
 	cursor = database.cursor()
 	hash_password = hash_new_pass(password)
+	print('hashed: ')
+	print(hash_password)
 	hash_filename = upload_file(file)
 	cursor = cursor.execute("INSERT INTO users (username, fullname, email, filename, password) VALUES (?, ?, ?, ?, ?)",
 							(username, fullname, email, hash_filename,
