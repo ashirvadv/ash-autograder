@@ -4,7 +4,7 @@ from flask import session, redirect, url_for, request
 import ash_autograder
 from ash_autograder.views.globals import get_projects, logged_in, get_user
 
-@ash_autograder.app.route('/users/', methods=['GET'])
+@ash_autograder.app.route('/user/', methods=['GET'])
 def show_user():
 	"""Show users."""
 	if logged_in() == False:
