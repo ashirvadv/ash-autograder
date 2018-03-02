@@ -16,10 +16,12 @@ CREATE TABLE projects(
 
 CREATE TABLE submissions(
 	submissionid INTEGER PRIMARY KEY AUTOINCREMENT,
+	projectid INTEGER NOT NULL,
 	filename_code VARCHAR(64) NOT NULL,
 	filename_report VARCHAR(64) NOT NULL,
 	owner VARCHAR(20) NOT NULL,
 	created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	FOREIGN KEY (projectid) REFERENCES projects(projectid),
 	FOREIGN KEY (owner) REFERENCES users(username)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE

@@ -25,6 +25,28 @@ def get_user(username):
 								+ 'username = ?', (username,))
 	return cursor.fetchone()
 
+def get_submission(submission_id):
+	"""Get a single submission."""
+	database = get_db()
+	cursor = database.execute('SELECT * FROM submissions WHERE '
+								+ 'submissionid = ?', (submission_id,))
+	return cursor.fetchone()
+
+def get_submissions_for_project(username, proj_id):
+	"""Get submissions for project proj_id."""
+	database = get_db()
+	cursor = database.execute('SELECT * FROM submissions WHERE '
+								+ 'owner = ? AND '
+								+ 'projectid = ?', (username, proj_id,))
+	return cursor.fetchall()
+
+def get_submissions(username):
+	"""Get all submissions for username."""
+	database = get_db()
+	cursor = database.execute('SELECT * FROM submissions WHERE '
+								+ 'owner = ?', (username,))
+	return cursor.fetchall()
+
 def logged_in():
 	"""Checks if user is logged in, else redirects to login."""
 	return 'username' in session
