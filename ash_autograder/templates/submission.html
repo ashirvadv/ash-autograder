@@ -44,10 +44,10 @@
 		<h1>Project {{project_num}} Submission {{submission['created']}}</h1>
 		
 		<div class="SubmittedCode">
-			<a href="submissions_code/temp.txt" download>{{submission['filename_code']}}</a>
+			<a href="submissions_code/{{submission['filename_code']}}" download>{{submission['filename_code']}}</a>
 		</div>
 		<div class="SubmissionReport">
-			<iframe src="submissions_reports/temp.txt" height="1000px" width="100%">
+			<iframe src="submissions_reports/{{submission['filename_report']}}" height="1000px" width="100%">
 			</iframe>
 		</div>
 

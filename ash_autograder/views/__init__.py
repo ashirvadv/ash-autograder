@@ -5,3 +5,4 @@ from ash_autograder.views.logout import logout
 from ash_autograder.views.users import show_users
 from ash_autograder.views.user import show_user
 from ash_autograder.views.submit import show_autograder
+from ash_autograder.views.submission import show_submission
