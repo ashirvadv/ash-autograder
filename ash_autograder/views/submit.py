@@ -15,6 +15,10 @@ def show_autograder(project_num):
 	logname = session['username']
 	submissions = get_submissions_for_project(logname, project_num)
 
+	submits_exist = False
 
-	context = {'logname' : logname, 'submissions' : submissions, 'project_num': project_num}
+	if len(submissions) > 0:
+		submits_exist = True
+
+	context = {'logname' : logname, 'submissions' : submissions, 'project_num': project_num, 'submits_exist' : submits_exist}
 	return flask.render_template("submit.html", **context)

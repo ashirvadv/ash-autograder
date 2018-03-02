@@ -50,11 +50,17 @@
 		</div>
 
 		<div class=SubmissionsList>
-			<ul>
-				{% for submission in submissions %}
-					<li><a href="/submission/{{submission_id}}/">Submission submission['created']</a></li>
-				{% endfor %}
-			</ul>
+			{% if submits_exist %}
+				<ul>
+					{% for submission in submissions %}
+						<li><a href="/submission/{{submission_id}}/">Submission submission['created']</a></li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<ul>
+					<li>No submits made yet.</li>
+				</ul>
+			{% endif %}
 		</div>
 
 	</div>

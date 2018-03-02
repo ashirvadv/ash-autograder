@@ -16,6 +16,11 @@ def show_submission(submission_id):
 
 	logname = session['username']
 	submission = get_submission(submission_id)
+
+	if submission is None:
+		#redirect
+		return redirect(url_for('show_autograder'))
+
 	project_num = submission['projectid']
 
 
