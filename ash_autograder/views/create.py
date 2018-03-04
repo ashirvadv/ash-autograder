@@ -79,6 +79,12 @@ def create_filename_create(filename):
 def show_create():
 	"""Create account."""
 	if request.method == 'POST':
+		#allow the user to not be required to upload a pic
+		#print('hehehe')
+		#print(request.files)
+		#file_obj = 
+		#if len(request.files) == 0:
+		#	print('no file')
 		return create_account(request.form['username'], 
 								request.form['fullname'],
 								request.form['email'],

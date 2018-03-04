@@ -4,7 +4,6 @@ from flask import session, redirect, url_for, request
 import ash_autograder
 from ash_autograder.views.globals import logged_in, get_submission
 
-
 @ash_autograder.app.route('/submission/<submission_id>', methods=['GET'])
 def show_submission(submission_id):
 	"""Display submission route."""

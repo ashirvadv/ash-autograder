@@ -2,17 +2,17 @@ from functools import wraps
 import flask
 from flask import session, redirect, url_for, request
 import ash_autograder
-from ash_autograder.views.globals import get_projects, logged_in
+from ash_autograder.views.globals import get_visible_projects, logged_in
 
 def login_required(func):
-    """Require login."""
-    @wraps(func)
-    def wrap(*args, **kwargs):
-        """Wrap."""
-        if 'username' in session:
-            return func(*args, **kwargs)
-        return redirect(url_for('show_login'))
-    return wrap
+	"""Require login."""
+	@wraps(func)
+	def wrap(*args, **kwargs):
+		"""Wrap."""
+		if 'username' in session:
+			return func(*args, **kwargs)
+		return redirect(url_for('show_login'))
+	return wrap
 
 @ash_autograder.app.route('/', methods=['GET'])
 def show_index():
@@ -21,7 +21,7 @@ def show_index():
 	if not logged_in():
 		return redirect(url_for('show_login'))
 
-	projects = get_projects()
+	projects = get_visible_projects(session['username'])
 
 	logname = session['username']
 

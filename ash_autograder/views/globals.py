@@ -18,6 +18,13 @@ def get_users():
 	"""Get all users from users table."""
 	return get_all_table('users')
 
+def get_visible_projects(username):
+	"""Get all visible projects for user."""
+	database = get_db()
+	cursor = database.execute('SELECT * FROM project_permissions '
+								+ 'WHERE username = ?', (username,))
+	return cursor.fetchall()
+
 def get_user(username):
 	"""Get user with username from users table."""
 	database = get_db()
@@ -61,3 +68,13 @@ def form_file_name(project_num, submission_num):
 def is_admin():
 	"""Return true if admin is logged in."""
 	return session['username'] == 'admin'
+
+def project_visible_to_user(username, project_num):
+	"""Returns true if user has access to project."""
+	projects = get_visible_projects(username)
+
+	for project in projects:
+		if project['projectid'] == project_num:
+			return True
+
+	return False

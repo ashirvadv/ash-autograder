@@ -49,16 +49,20 @@
 			</form>
 		</div>
 
+		{% if making_submit %}
+			<p>Grading new submission</p>
+		{% endif %}
+
 		<div class=SubmissionsList>
 			{% if submits_exist %}
 				<ul>
 					{% for submission in submissions %}
-						<li><a href="/submission/{{submission_id}}/">Submission submission['created']</a></li>
+						<li><a href="/submission/{{submission_id}}/">Submission {{submission['created']}}</a></li>
 					{% endfor %}
 				</ul>
 			{% else %}
 				<ul>
-					<li>No submits made yet.</li>
+					<li>No submits made yet</li>
 				</ul>
 			{% endif %}
 		</div>
