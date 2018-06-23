@@ -1,5 +1,5 @@
 #!/bin/bash
-# insta485db
+# autograderdb
 
 # Stop on errors
 set -e

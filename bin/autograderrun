@@ -1,8 +1,8 @@
 #!/bin/bash
-# insta485run
+# autograderrun
 
-if [ ! -f var/insta485.sqlite3 ]; then
-	./bin/insta485db create
+if [ ! -f var/ash_autograder.sqlite3 ]; then
+	./bin/autograderdb create
 fi
 export FLASK_DEBUG=True
 export FLASK_APP=ash_autograder
