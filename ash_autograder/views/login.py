@@ -32,6 +32,7 @@ def login(username, password):
 	user = get_user(username)
 
 	if user_not_exist(user):
+		print('not exist')
 		return flask.render_template('login.html')
 
 	hashed_password = hash_password(password, user['password'])

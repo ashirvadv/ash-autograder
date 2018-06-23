@@ -51,11 +51,10 @@ case $1 in
     ;;
 
   "dump")
-    sqlite3 -batch -line var/ash_autograder.sqlite3 'SELECT * FROM comments'
-    sqlite3 -batch -line var/ash_autograder.sqlite3 'SELECT * FROM following'
-    sqlite3 -batch -line var/ash_autograder.sqlite3 'SELECT * FROM likes'
-    sqlite3 -batch -line var/ash_autograder.sqlite3 'SELECT * FROM posts'
     sqlite3 -batch -line var/ash_autograder.sqlite3 'SELECT * FROM users'
+    sqlite3 -batch -line var/ash_autograder.sqlite3 'SELECT * FROM projects'
+    sqlite3 -batch -line var/ash_autograder.sqlite3 'SELECT * FROM project_permissions'
+    sqlite3 -batch -line var/ash_autograder.sqlite3 'SELECT * FROM submissions'
     ;;
   *)
     usage

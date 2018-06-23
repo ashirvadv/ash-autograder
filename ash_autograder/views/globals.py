@@ -73,6 +73,9 @@ def is_admin():
 
 def project_visible_to_user(username, project_num):
 	"""Returns true if user has access to project."""
+	if username == 'admin':
+		return True
+		
 	projects = get_visible_projects(username)
 
 	for project in projects:
