@@ -4,6 +4,8 @@ from flask import session, redirect, url_for, request
 from ash_autograder.model import get_db
 import ash_autograder
 
+USERNAME_SUBMIT = {}
+
 def get_all_table(table_name):
 	"""Get all data from table specified."""
 	database = get_db()

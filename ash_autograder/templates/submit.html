@@ -42,15 +42,16 @@
 		<br>
 		<br>
 		<h1>Project {{project_num}}</h1>
-		<div class=SubmitFile>
-			<form action="" method="post">
-				Submit your code <input type="file" name="file">
-				<br>
-			</form>
-		</div>
 
 		{% if making_submit %}
 			<p>Grading new submission</p>
+		{% else %}
+			<div class=SubmitFile>
+				<form action="" method="post">
+					Submit your code <input type="file" name="file">
+					<br>
+				</form>
+			</div>
 		{% endif %}
 
 		<div class=SubmissionsList>
