@@ -108,6 +108,8 @@ class AutoDbUnitTests:
 			assert False
 		assert False
 
+	'''UPDATE STATEMENT TESTS'''
+
 	def test_update_no_table(self):
 		'''Test for no table provided as input.'''
 		try:
@@ -183,8 +185,6 @@ class AutoDbUnitTests:
 		except Exception:
 			pass
 		assert False
-
-	'''UPDATE STATEMENT TESTS'''
 
 def print_result(num_run, num_passed):
 	'''Print out the result of the tests.'''
