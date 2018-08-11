@@ -6,6 +6,6 @@ def authenticate_user():
 	If not, then this function will redirect to the login page.
 	'''
 	if 'logged_in' in session:
-		return
+		return None
 	else:
 		return redirect(url_for('show_login'))

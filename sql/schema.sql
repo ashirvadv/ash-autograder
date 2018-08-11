@@ -26,9 +26,16 @@ CREATE TABLE Email_to_Id(
 );
 
 CREATE TABLE Projects(
-	project_id INTEGER NOT NULL,
+	project_id INTEGER PRIMARY KEY AUTOINCREMENT,
 	project_name VARCHAR(40) NOT NULL,
-	PRIMARY KEY(project_id)
+);
+
+CREATE TABLE Project_Permissions(
+	project_id INTEGER,
+	user_id INTEGER,
+	PRIMARY KEY(project_id, user_id),
+	FOREIGN KEY(project_id) REFERENCES Projects(project_id),
+	FOREIGN KEY(user_id) REFERENCES Users(user_id)
 );
 
 --Each user will also create their own submissions table
