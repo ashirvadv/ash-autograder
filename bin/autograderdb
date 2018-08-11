@@ -19,46 +19,36 @@ fi
 case $1 in
   "create")
   if [ -f "var/ash_autograder.sqlite3" ]; then
-    echo 'Error: database already exists'
-    exit 1
+	echo 'Error: database already exists'
+	exit 1
   fi
-    mkdir -p var/uploads
-    echo '+ mkdir -p var/uploads'
-    sqlite3 var/ash_autograder.sqlite3 < sql/schema.sql
-    echo '+ sqlite3 var/ash_autograder.sqlite3 < sql/schema.sql'
-    sqlite3 var/ash_autograder.sqlite3 < sql/data.sql
-    echo '+ sqlite3 var/ash_autograder.sqlite3 < sql/data.sql'
-    cp sql/uploads/* var/uploads/
-    echo '+ cp sql/uploads/* var/uploads/'
-    ;;
+	sqlite3 var/ash_autograder.sqlite3 < sql/schema.sql
+	echo '+ sqlite3 var/ash_autograder.sqlite3 < sql/schema.sql'
+	sqlite3 var/ash_autograder.sqlite3 < sql/data.sql
+	echo '+ sqlite3 var/ash_autograder.sqlite3 < sql/data.sql'
+	;;
 
   "destroy")
-    rm -rf var/ash_autograder.sqlite3 var/uploads
-    echo '+ rm -rf var/ash_autograder.sqlite3 var/uploads'
-    ;;
+	rm -rf var/ash_autograder.sqlite3
+	echo '+ rm -rf var/ash_autograder.sqlite3'
+	;;
 
   "reset")
-    rm -rf var/ash_autograder.sqlite3 var/uploads
-    echo '+ rm -rf var/ash_autograder.sqlite3 var/uploads'
-    mkdir -p var/uploads
-    echo '+ mkdir -p var/uploads'
-    sqlite3 var/ash_autograder.sqlite3 < sql/schema.sql
-    echo '+ sqlite3 var/ash_autograder.sqlite3 < sql/schema.sql'
-    sqlite3 var/ash_autograder.sqlite3 < sql/data.sql
-    echo '+ sqlite3 var/ash_autograder.sqlite3 < sql/data.sql'
-    cp sql/uploads/* var/uploads/
-    echo '+ cp sql/uploads/* var/uploads/'
-    ;;
+	rm -rf var/ash_autograder.sqlite3
+	echo '+ rm -rf var/ash_autograder.sqlite3'
+	sqlite3 var/ash_autograder.sqlite3 < sql/schema.sql
+	echo '+ sqlite3 var/ash_autograder.sqlite3 < sql/schema.sql'
+	sqlite3 var/ash_autograder.sqlite3 < sql/data.sql
+	echo '+ sqlite3 var/ash_autograder.sqlite3 < sql/data.sql'
+	;;
 
   "dump")
-    sqlite3 -batch -line var/ash_autograder.sqlite3 'SELECT * FROM users'
-    sqlite3 -batch -line var/ash_autograder.sqlite3 'SELECT * FROM projects'
-    sqlite3 -batch -line var/ash_autograder.sqlite3 'SELECT * FROM project_permissions'
-    sqlite3 -batch -line var/ash_autograder.sqlite3 'SELECT * FROM submissions'
-    ;;
+	sqlite3 -batch -line var/ash_autograder.sqlite3 'SELECT * FROM Users'
+	sqlite3 -batch -line var/ash_autograder.sqlite3 'SELECT * FROM Username_to_Id'
+	;;
   *)
-    usage
-    exit 1
-    ;;
+	usage
+	exit 1
+	;;
 esac
 

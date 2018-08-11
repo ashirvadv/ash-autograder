@@ -2,12 +2,11 @@ CREATE TABLE Users(
 	first_name VARCHAR(20) NOT NULL,
 	last_name VARCHAR(20) NOT NULL,
 	email VARCHAR(40) NOT NULL,
-	user_id INTEGER NOT NULL,
+	user_id INTEGER PRIMARY KEY AUTOINCREMENT,
 	created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	deleted TIMESTAMP,
 	username VARCHAR(20) NOT NULL,
 	password VARCHAR(255) NOT NULL,
-	PRIMARY KEY(user_id),
 	FOREIGN KEY(username) REFERENCES Username_to_Id(username),
 	FOREIGN KEY(email) REFERENCES Email_to_Id(email)
 );
