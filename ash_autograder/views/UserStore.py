@@ -29,3 +29,15 @@ def create_user(data):
 	user = retrieve_from_table_condition('Users', ['user_id'])
 	user_id = user['user_id']
 	insert_into_table('Username_to_Id', ['username', 'user_id'])
+
+def get_user_id_from_email(email):
+	'''Return user_id for an email.'''
+	condition = 'WHERE email = "{}"'.format(email)
+	user_id = retrieve_from_table_condition('Email_to_Id', ['user_id'], condition)
+	return user_id
+
+def get_user_id_from_username(username):
+	'''Return user_id for a username.'''
+	condition = 'WHERE username = "{}"'.format(username)
+	user_id = retrieve_from_table_condition('Username_to_Id', ['user_id'], condition)
+	return user_id
