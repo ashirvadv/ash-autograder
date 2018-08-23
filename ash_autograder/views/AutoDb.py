@@ -37,56 +37,73 @@ def build_select_command(table_name, columns, condition):
 
 def insert_into_table(table_name, columns, data):
 	'''Insert the following data into table_name.'''
+	database = get_db()
+	cursor = database.cursor()
+	query = build_insert_command(table_name, columns, data)
+	print('about to execute')
+	print(query)
+	try:
+		cursor.execute(query)
+	except Exception as e:
+		print(e)
+	print('executed')
+	database.commit()
+	print('committed')
+
+def build_insert_command(table_name, columns, data):
+	'''Build the insert query.'''
 	if table_name == None:
 		raise MissingInputError('You must specify a table_name when running an INSERT command.')
 
 	if columns == None:
 		raise MissingInputError('You must specify columns when running an INSERT command.')
-
-	database = get_db()
-	cursor = database.cursor()
-
+	
 	if len(columns) != len(data):
 		raise UnequalListSizeError('Occured in insert_into_table in AutoDb.py')
 
-	query = build_insert_command(table_name, columns, data)
-	cursor.execute(query)
-	database.commit()
-
-def build_insert_command(table_name, columns, data):
-	'''Build the insert query.'''
-	query = 'INSERT INTO ' + table_name + '('
+	print('actually buliding now')
+	query = 'INSERT INTO ' + table_name + ' ('
+	print('hm')
 	query += ', '.join(columns) + ') VALUES ("'
-	query += '", '.join(data) + '")'
+	print('hi')
+	print(data)
+	query += '", "'.join(data) + '")'
+	print('end')
 	return query
 
 def update_table(table_name, columns, data):
 	'''Update all rows in a table.'''
-	try:
-		update_table(table_name, columns, data, None)
-	except UnequalListSizeError:
-		raise UnequalListSizeError('Occured in update_table in AutoDb.py')
+	update_table(table_name, columns, data, None)
 
 def update_table(table_name, columns, data, condition):
 	'''Update a row in the given table that satisfy the condition.'''
 	database = get_db()
 	cursor = database.cursor()
-
-	if len(columns) != len(data):
-		raise UnequalListSizeError('Occured in update_table with condition in AutoDb.py')
-
 	query = build_update_command(table_name, columns, data, condition)
 	cursor.execute(query)
 	database.commit()
 
 def build_update_command(table_name, columns, data, condition):
 	'''Build the update query.'''
+
+	if table_name == None:
+		raise MissingInputError('You must specify a table_name when running an UPDATE command.')
+
+	if columns == None:
+		raise MissingInputError('You must specify columns when running an UPDATE command.')
+
+	if data == None:
+		raise MissingInputError('You must specify data when running an UPDATE command.')
+
+	if len(columns) != len(data):
+		raise UnequalListSizeError('Occured in update_table with condition in AutoDb.py')
+
 	query = 'UPDATE ' + table_name + ' SET '
 	last_index = len(columns) - 1
 	for i in range(last_index):
-		query += columns[i] + ' = ' + '"' + data[i] + '",'
+		query += columns[i] + ' = ' + '"' + data[i] + '", '
 
 	query += columns[last_index] + ' = ' + '"' + data[last_index] + '"'
 	if condition != None:
-		query += condition
+		query += ' ' + condition
 	return query

@@ -5,29 +5,12 @@ CREATE TABLE Users(
 	user_id INTEGER PRIMARY KEY AUTOINCREMENT,
 	created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	deleted TIMESTAMP,
-	username VARCHAR(20) NOT NULL,
 	password VARCHAR(255) NOT NULL,
-	FOREIGN KEY(username) REFERENCES Username_to_Id(username),
-	FOREIGN KEY(email) REFERENCES Email_to_Id(email)
-);
-
-CREATE TABLE Username_to_Id(
-	username VARCHAR(20) NOT NULL,
-	user_id INTEGER NOT NULL,
-	PRIMARY KEY(username),
-	FOREIGN KEY(user_id) REFERENCES Users(user_id)
-);
-
-CREATE TABLE Email_to_Id(
-	email VARCHAR(20) NOT NULL,
-	user_id INTEGER NOT NULL,
-	PRIMARY KEY(email),
-	FOREIGN KEY(user_id) REFERENCES Users(user_id)
 );
 
 CREATE TABLE Projects(
 	project_id INTEGER PRIMARY KEY AUTOINCREMENT,
-	project_name VARCHAR(40) NOT NULL,
+	project_name VARCHAR(40) NOT NULL
 );
 
 CREATE TABLE Project_Permissions(

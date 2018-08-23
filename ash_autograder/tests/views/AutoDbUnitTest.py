@@ -6,6 +6,7 @@ from ash_autograder.views.globals import get_all_methods_from_class
 class AutoDbUnitTests:
 	'''SELECT STATEMENT TESTS'''
 
+	@classmethod
 	def test_select_no_table(self):
 		'''Test that the NoInputError is raised when no table_name is provided.'''
 		try:
@@ -16,6 +17,7 @@ class AutoDbUnitTests:
 			pass
 		assert False
 
+	@classmethod
 	def test_select_no_columns(self):
 		'''Test that the NoInputError is raised when no columns are provided.'''
 		try:
@@ -26,6 +28,7 @@ class AutoDbUnitTests:
 			pass
 		assert False
 
+	@classmethod
 	def test_select_single_column(self):
 		'''Test that build_select_command works for a single column passed in.'''
 		try:
@@ -34,6 +37,7 @@ class AutoDbUnitTests:
 			assert False
 		assert query == 'SELECT col FROM table'
 
+	@classmethod
 	def test_select_single_column_with_condition(self):
 		'''Test that build_select_command works for a single column passed in.'''
 		try:
@@ -42,6 +46,7 @@ class AutoDbUnitTests:
 			assert False
 		assert query == 'SELECT col FROM table WHERE col = 5'
 
+	@classmethod
 	def test_select_mult_column(self):
 		'''Test that build_select_command works for multiple columns passed in.'''
 		try:
@@ -50,6 +55,7 @@ class AutoDbUnitTests:
 			assert False
 		assert query == 'SELECT col1, col2 FROM table'
 
+	@classmethod
 	def test_select_mult_column_with_condition(self):
 		'''Test that build_select_command works for multiple columns passed in.'''
 		try:
@@ -60,6 +66,7 @@ class AutoDbUnitTests:
 
 	'''INSERT STATEMENT TESTS'''
 
+	@classmethod
 	def test_insert_no_table(self):
 		'''Test that the NoInputError is raised when no table_name is provided.'''
 		try:
@@ -70,16 +77,19 @@ class AutoDbUnitTests:
 			pass
 		assert False
 
+	@classmethod
 	def test_insert_no_columns(self):
 		'''Test that the NoInputError is raised when no columns are provided.'''
 		try:
 			query = build_insert_command('table', None, None)
+			print(query)
 		except MissingInputError:
 			return
 		except Exception:
 			pass
 		assert False
 
+	@classmethod
 	def test_insert_unequal_lists(self):
 		'''Test that when provided a list of columns and a different size list of data, this fails.'''
 		try:
@@ -90,26 +100,31 @@ class AutoDbUnitTests:
 			pass
 		assert False
 
+	@classmethod
 	def test_insert_single_column(self):
 		'''Test that when provided a single column and data insert builds correct string.'''
 		try:
 			query = build_insert_command('table', ['col1'], ['a'])
 			assert query == 'INSERT INTO table (col1) VALUES ("a")'
+			return
 		except Exception:
 			assert False
 		assert False
 
+	@classmethod
 	def test_insert_mult_columns(self):
 		'''Test that insert builds string for multiple columns of data.'''
 		try:
-			query = build_insert_command('table', ['col1', 'col2'], ['a', 'b'])
-			assert query == 'INSERT INTO table (col1, col2) VALUES ("a", "b")'
+			query = build_insert_command('table', ['col1', 'col2', 'col3'], ['a', 'b', 'c'])
+			assert query == 'INSERT INTO table (col1, col2, col3) VALUES ("a", "b", "c")'
+			return
 		except Exception:
 			assert False
 		assert False
 
 	'''UPDATE STATEMENT TESTS'''
 
+	@classmethod
 	def test_update_no_table(self):
 		'''Test for no table provided as input.'''
 		try:
@@ -120,6 +135,7 @@ class AutoDbUnitTests:
 			pass
 		assert False
 
+	@classmethod
 	def test_update_no_columns(self):
 		'''Test for no columns provided as input.'''
 		try:
@@ -130,6 +146,7 @@ class AutoDbUnitTests:
 			pass
 		assert False
 
+	@classmethod
 	def test_update_no_data(self):
 		'''Test for no data provided as input.'''
 		try:
@@ -140,6 +157,7 @@ class AutoDbUnitTests:
 			pass
 		assert False
 
+	@classmethod
 	def test_update_unequal_list(self):
 		'''Test for unequal list sizes.'''
 		try:
@@ -150,38 +168,46 @@ class AutoDbUnitTests:
 			pass
 		assert False
 
+	@classmethod
 	def test_update_single_column(self):
 		'''Test for a single column provided.'''
 		try:
 			query = build_update_command('table', ['col'], ['a'], None)
 			assert query == 'UPDATE table SET col = "a"'
+			return
 		except Exception:
 			pass
 		assert False
 
+	@classmethod
 	def test_update_single_column_with_condition(self):
 		'''Test for a single column with condition provided.'''
 		try:
 			query = build_update_command('table', ['col'], ['a'], 'WHERE col = "b"')
 			assert query == 'UPDATE table SET col = "a" WHERE col = "b"'
+			return
 		except Exception:
 			pass
 		assert False		
 
+	@classmethod
 	def test_update_mult_column(self):
 		'''Test for multiple columns provided.'''
 		try:
 			query = build_update_command('table', ['col', 'col2'], ['a', 'b'], None)
 			assert query == 'UPDATE table SET col = "a", col2 = "b"'
+			return
 		except Exception:
 			pass
 		assert False
 
+	@classmethod
 	def test_update_mult_column_with_condition(self):
 		'''Test for multiple columns with condition provided.'''
 		try:
 			query = build_update_command('table', ['col', 'col2'], ['a', 'b'], 'WHERE col = "b"')
 			assert query == 'UPDATE table SET col = "a", col2 = "b" WHERE col = "b"'
+			return
 		except Exception:
 			pass
 		assert False
@@ -202,7 +228,7 @@ def main():
 
 	for test in tests:
 		try:
-			exec(test_class + test)
+			exec(test_class + test + '()')
 			num_tests_passed += 1
 		except AssertionError:
 			print(str(test) + ' FAILED')

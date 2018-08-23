@@ -9,3 +9,8 @@ def authenticate_user():
 		return None
 	else:
 		return redirect(url_for('show_login'))
+
+def insert_into_session(user_id):
+	'''Include this user_id into the session.'''
+	session['logged_in'] = True
+	session['user_id'] = user_id

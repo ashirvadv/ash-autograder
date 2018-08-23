@@ -24,20 +24,32 @@ def get_all_users_with_columns(columns):
 
 def create_user(data):
 	'''Create a user given the provided data.'''
+	print('trying to create user')
 	columns = ['first_name', 'last_name', 'email', 'username', 'password']
-	insert_into_table('Users', columns, data)
+	print('about to insert into table')
+	data_col = [data['first_name'], data['last_name'], data['email'], data['username'], data['password']]
+	print('now going to')
+	insert_into_table('Users', columns, data_col)
+	print('inserted into table')
 	user = retrieve_from_table_condition('Users', ['user_id'])
 	user_id = user['user_id']
 	insert_into_table('Username_to_Id', ['username', 'user_id'])
+	print('finished creating user')
 
 def get_user_id_from_email(email):
 	'''Return user_id for an email.'''
 	condition = 'WHERE email = "{}"'.format(email)
-	user_id = retrieve_from_table_condition('Email_to_Id', ['user_id'], condition)
-	return user_id
+	try:
+		user_id = retrieve_from_table_condition('Email_to_Id', ['user_id'], condition)
+		return user_id
+	except Exception:
+		return None
 
 def get_user_id_from_username(username):
 	'''Return user_id for a username.'''
 	condition = 'WHERE username = "{}"'.format(username)
-	user_id = retrieve_from_table_condition('Username_to_Id', ['user_id'], condition)
-	return user_id
+	try:
+		user_id = retrieve_from_table_condition('Username_to_Id', ['user_id'], condition)
+		return user_id
+	except Exception:
+		return None

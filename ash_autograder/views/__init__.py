@@ -12,3 +12,4 @@ from ash_autograder.views.dashboard import show_dashboard
 USER ACCOUNT PAGES
 '''
 from ash_autograder.views.sign_up import show_sign_up
+from ash_autograder.views.login import show_login
