@@ -6,6 +6,8 @@ from ash_autograder.views.UserStore import *
 from ash_autograder.views.Authenticate import *
 from ash_autograder.views.Cryptography import correct_password
 
+from ash_autograder.views.urls import LOGIN_HTML, LOGIN_URL, SIGN_UP_URL
+
 def is_email(username):
 	'''Return whether the username provided is an email.'''
 	return '@' in username
@@ -42,7 +44,7 @@ def login_user(username, password):
 
 	return login_user_by_id(user_id, password)
 
-@ash_autograder.app.route('/accounts/login/', methods=['GET', 'POST'])
+@ash_autograder.app.route(LOGIN_URL, methods=['GET', 'POST'])
 def show_login():
 	'''Show sign up page.'''
 
@@ -56,4 +58,6 @@ def show_login():
 		password = request.form['password']
 		return login_user(username, password)
 
-	return flask.render_template('login.html')
+	context = {'SIGN_UP_URL' : SIGN_UP_URL}
+
+	return flask.render_template(LOGIN_HTML, **context)

@@ -3,8 +3,9 @@ from flask import session, redirect, url_for, request
 import ash_autograder
 from ash_autograder.views.Authenticate import authenticate_user
 
+from ash_autograder.views.urls import DASHBOARD_HTML, DASHBOARD_URL
 
-@ash_autograder.app.route('/dashboard/', methods=['GET', 'POST'])
+@ash_autograder.app.route(DASHBOARD_URL, methods=['GET', 'POST'])
 def show_dashboard():
 	'''Show dashboard page.'''
 
@@ -16,4 +17,4 @@ def show_dashboard():
 	username = session['username']
 	user_id = session['user_id']
 
-	return flask.render_template('dashboard.html')
+	return flask.render_template(DASHBOARD_HTML)
