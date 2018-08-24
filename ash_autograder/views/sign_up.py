@@ -22,13 +22,6 @@ def check_valid_email(email):
 	if user_id != None:
 		raise EmailExistsError('Please provide a new email address.')
 
-def check_valid_username(username):
-	'''Return if username is valid, throw exception otherwise.'''
-	user_id = get_user_id_from_username(username)
-
-	if user_id != None:
-		raise UsernameExistsError('Please provide a new username.')
-
 def password_is_strong(password):
 	'''Return true if the password is strong enough.'''
 	'''
@@ -76,7 +69,6 @@ def check_valid_inputs(user_data):
 	Valid Password
 	'''
 	check_valid_email(user_data['email'])
-	check_valid_username(user_data['username'])
 	check_valid_password(user_data['password'], user_data['password2'])
 
 def render_sign_up(context={}):
@@ -89,9 +81,13 @@ def create_user_account(user_data):
 	try:
 		check_valid_inputs(user_data)
 		user_data['password'] = hash_password(user_data['password'])
+		print('about to create user')
 		create_user(user_data)
+		print('created the user')
 		return redirect(url_for('show_dashboard'))
-	except Exception:
+	except Exception as e:
+		print('got an exception')
+		print(e)
 		return render_sign_up()
 
 @ash_autograder.app.route(SIGN_UP_URL, methods=['GET', 'POST'])
