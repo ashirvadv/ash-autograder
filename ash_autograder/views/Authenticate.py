@@ -16,3 +16,17 @@ def insert_into_session(user_id, email=None):
 	session['user_id'] = user_id
 	if email != None:
 		session['username'] = email
+
+def remove_elt_from_session(elt):
+	'''Remove elt from session.'''
+	if elt in session:
+		session.pop(elt)
+
+def remove_from_session():
+	'''Remove from session.'''
+	elements = []
+	elements.append('logged_in')
+	elements.append('user_id')
+	elements.append('username')
+	for elt in elements:
+		remove_elt_from_session(elt)

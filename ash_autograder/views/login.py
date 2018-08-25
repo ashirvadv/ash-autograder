@@ -24,7 +24,9 @@ def login_user_by_id(user_id, password):
 		'''Incorrect password.'''
 		return redirect(url_for('show_login'))
 
+	print('gonna insert')
 	insert_into_session(user['user_id'], user['email'])
+	print('redirect')
 	return redirect(url_for('show_dashboard'))
 
 def login_user(username, password):
@@ -40,19 +42,19 @@ def login_user(username, password):
 		'''Username was invaild.'''
 		return redirect(url_for('show_login'))
 
+	print('got user id')
 	return login_user_by_id(user_id, password)
 
 @ash_autograder.app.route(LOGIN_URL, methods=['GET', 'POST'])
 def show_login():
 	'''Show sign up page.'''
-
 	authenticated = authenticate_user()
 
 	if authenticated == None:
 		redirect(url_for('show_dashboard'))
 
 	if request.method == 'POST':
-		username = request.form['username']
+		username = request.form['email']
 		password = request.form['password']
 		return login_user(username, password)
 

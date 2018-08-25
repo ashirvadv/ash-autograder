@@ -17,3 +17,6 @@ SIGN_UP_HTML = 'sign_up.html'
 # /accounts/login/
 LOGIN_URL = '/accounts/login/'
 LOGIN_HTML = 'login.html'
+
+# /accounts/logout/
+LOGOUT_URL = '/accounts/logout/'

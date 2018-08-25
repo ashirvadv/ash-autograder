@@ -22,9 +22,7 @@ CREATE TABLE Projects(
 CREATE TABLE Project_Permissions(
 	project_id INTEGER,
 	user_id INTEGER,
-	PRIMARY KEY(project_id, user_id),
-	FOREIGN KEY(project_id) REFERENCES Projects(project_id),
-	FOREIGN KEY(user_id) REFERENCES Users(user_id)
+	PRIMARY KEY(project_id, user_id)
 );
 
 --Each user will also create their own submissions table

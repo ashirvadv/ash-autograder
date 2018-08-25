@@ -16,3 +16,5 @@ USER ACCOUNT PAGES
 from ash_autograder.views.sign_up import show_sign_up
 # /accounts/login/
 from ash_autograder.views.login import show_login
+# /accounts/logout/
+from ash_autograder.views.logout import show_logout
