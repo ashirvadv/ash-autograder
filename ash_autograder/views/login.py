@@ -24,9 +24,7 @@ def login_user_by_id(user_id, password):
 		'''Incorrect password.'''
 		return redirect(url_for('show_login'))
 
-	print('gonna insert')
 	insert_into_session(user['user_id'], user['email'])
-	print('redirect')
 	return redirect(url_for('show_dashboard'))
 
 def login_user(username, password):
@@ -42,7 +40,6 @@ def login_user(username, password):
 		'''Username was invaild.'''
 		return redirect(url_for('show_login'))
 
-	print('got user id')
 	return login_user_by_id(user_id, password)
 
 @ash_autograder.app.route(LOGIN_URL, methods=['GET', 'POST'])
