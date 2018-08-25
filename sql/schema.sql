@@ -8,6 +8,12 @@ CREATE TABLE Users(
 	password VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE Email_to_Id(
+	email VARCHAR(40),
+	user_id INTEGER NOT NULL,
+	PRIMARY KEY(email)
+);
+
 CREATE TABLE Projects(
 	project_id INTEGER PRIMARY KEY AUTOINCREMENT,
 	project_name VARCHAR(40) NOT NULL

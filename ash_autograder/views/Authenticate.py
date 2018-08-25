@@ -10,7 +10,9 @@ def authenticate_user():
 	else:
 		return redirect(url_for('show_login'))
 
-def insert_into_session(user_id):
+def insert_into_session(user_id, email=None):
 	'''Include this user_id into the session.'''
 	session['logged_in'] = True
 	session['user_id'] = user_id
+	if email != None:
+		session['username'] = email

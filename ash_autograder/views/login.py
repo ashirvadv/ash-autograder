@@ -20,13 +20,11 @@ def login_user_by_id(user_id, password):
 	except Exception:
 		'''Some other error came up.'''
 		return redirect(url_for('show_login'))
-
 	if not correct_password(user['password'], password):
 		'''Incorrect password.'''
 		return redirect(url_for('show_login'))
 
-	insert_into_session(user['user_id'])
-
+	insert_into_session(user['user_id'], user['email'])
 	return redirect(url_for('show_dashboard'))
 
 def login_user(username, password):

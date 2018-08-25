@@ -17,4 +17,6 @@ def show_dashboard():
 	username = session['username']
 	user_id = session['user_id']
 
-	return flask.render_template(DASHBOARD_HTML)
+	context = {'username': username, 'user_id': user_id}
+
+	return flask.render_template(DASHBOARD_HTML, **context)

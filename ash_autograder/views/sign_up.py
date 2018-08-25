@@ -4,6 +4,7 @@ import ash_autograder
 
 from ash_autograder.views.Cryptography import hash_password
 from ash_autograder.views.UserStore import *
+from ash_autograder.views.Authenticate import *
 from ash_autograder.views.SignUpExceptions import *
 
 from ash_autograder.views.urls import SIGN_UP_HTML, SIGN_UP_URL, LOGIN_URL
@@ -74,20 +75,17 @@ def check_valid_inputs(user_data):
 def render_sign_up(context={}):
 	'''Return the sign up page.'''
 	context['LOGIN_URL'] = LOGIN_URL
-	return flask.render_template(SIGN_UP_HTML)
+	return flask.render_template(SIGN_UP_HTML, **context)
 
 def create_user_account(user_data):
 	'''Given user data, create a new user.'''
 	try:
 		check_valid_inputs(user_data)
 		user_data['password'] = hash_password(user_data['password'])
-		print('about to create user')
-		create_user(user_data)
-		print('created the user')
+		user_id = create_user(user_data)
+		insert_into_session(user_id, user_data['email'])
 		return redirect(url_for('show_dashboard'))
 	except Exception as e:
-		print('got an exception')
-		print(e)
 		return render_sign_up()
 
 @ash_autograder.app.route(SIGN_UP_URL, methods=['GET', 'POST'])

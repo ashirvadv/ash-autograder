@@ -44,7 +44,9 @@ case $1 in
 
   "dump")
 	sqlite3 -batch -line var/ash_autograder.sqlite3 'SELECT * FROM Users'
-	sqlite3 -batch -line var/ash_autograder.sqlite3 'SELECT * FROM Username_to_Id'
+	sqlite3 -batch -line var/ash_autograder.sqlite3 'SELECT * FROM Email_to_Id'
+	sqlite3 -batch -line var/ash_autograder.sqlite3 'SELECT * FROM Projects'
+	sqlite3 -batch -line var/ash_autograder.sqlite3 'SELECT * FROM Project_Permissions'
 	;;
   *)
 	usage

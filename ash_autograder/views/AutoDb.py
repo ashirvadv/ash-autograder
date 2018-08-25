@@ -14,7 +14,7 @@ def retrieve_from_table_condition(table_name, columns, condition):
 
 	try:
 		rows = cursor.execute(query)
-	except SQLError:
+	except SQLError as e:
 		raise SQLError
 
 	result = rows.fetchall()
@@ -35,20 +35,46 @@ def build_select_command(table_name, columns, condition):
 		query += ' WHERE ' + condition
 	return query
 
+def retrieve_max_from_table(table_name, column, condition=None):
+	'''Retrieve the maximum on a column from a table.'''
+	database = get_db()
+	cursor = database.cursor()
+	query = build_max_command(table_name, column, condition)
+
+	try:
+		rows = cursor.execute(query)
+	except SQLError:
+		raise SQLError
+
+	result = rows.fetchone()
+	return result
+
+
+def build_max_command(table_name, column, condition=None):
+	'''Build a max query.'''
+
+	if table_name == None:
+		raise MissingInputError('You must specify a table_name when running a SELECT command.')
+
+	if column == None:
+		raise MissingInputError('You must specify a column when running a SELECT command.')
+
+	query = 'SELECT MAX(' + column + ')'
+	query += ' FROM ' + table_name
+	if condition != None:
+		query += ' WHERE ' + condition
+	return query
+
 def insert_into_table(table_name, columns, data):
 	'''Insert the following data into table_name.'''
 	database = get_db()
 	cursor = database.cursor()
 	query = build_insert_command(table_name, columns, data)
-	print('about to execute')
-	print(query)
 	try:
 		cursor.execute(query)
 	except Exception as e:
 		print(e)
-	print('executed')
 	database.commit()
-	print('committed')
 
 def build_insert_command(table_name, columns, data):
 	'''Build the insert query.'''
@@ -61,14 +87,9 @@ def build_insert_command(table_name, columns, data):
 	if len(columns) != len(data):
 		raise UnequalListSizeError('Occured in insert_into_table in AutoDb.py')
 
-	print('actually buliding now')
 	query = 'INSERT INTO ' + table_name + ' ('
-	print('hm')
 	query += ', '.join(columns) + ') VALUES ("'
-	print('hi')
-	print(data)
 	query += '", "'.join(data) + '")'
-	print('end')
 	return query
 
 def update_table(table_name, columns, data):
