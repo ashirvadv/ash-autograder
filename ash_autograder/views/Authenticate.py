@@ -30,3 +30,17 @@ def remove_from_session():
 	elements.append('username')
 	for elt in elements:
 		remove_elt_from_session(elt)
+
+def authenticate_admin():
+	'''
+	This function asserts that the user is an admin.
+	'''
+	authenticated = authenticate_user()
+
+	if authenticated != None:
+		return authenticated
+
+	if session['username'] == 'ashirvad.varma@gmail.com':
+		return None
+	else:
+		return redirect(url_for('show_dashboard'))

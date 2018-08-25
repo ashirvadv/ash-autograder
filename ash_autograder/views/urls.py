@@ -20,3 +20,12 @@ LOGIN_HTML = 'login.html'
 
 # /accounts/logout/
 LOGOUT_URL = '/accounts/logout/'
+
+
+'''
+PROJECT PAGES
+'''
+
+# /projects/
+PROJECTS_URL = '/projects/'
+PROJECTS_HTML = 'create_project.html'
