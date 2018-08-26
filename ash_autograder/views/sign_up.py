@@ -81,9 +81,12 @@ def create_user_account(user_data):
 	'''Given user data, create a new user.'''
 	try:
 		check_valid_inputs(user_data)
+
 		user_data['password'] = hash_password(user_data['password'])
 		user_id = create_user(user_data)
+
 		insert_into_session(user_id, user_data['email'])
+		
 		return redirect(url_for('show_dashboard'))
 	except Exception as e:
 		return render_sign_up()

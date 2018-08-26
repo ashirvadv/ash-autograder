@@ -28,4 +28,16 @@ PROJECT PAGES
 
 # /projects/
 PROJECTS_URL = '/projects/'
-PROJECTS_HTML = 'create_project.html'
+
+
+'''
+ADMIN PAGES
+'''
+
+# /admin/projects/
+ADMIN_PROJECTS_URL = '/admin/projects/'
+ADMIN_PROJECTS_HTML = 'admin_projects.html'
+
+# /admin/projects/create/
+ADMIN_PROJECTS_CREATE_URL = '/admin/projects/create/'
+ADMIN_PROJECTS_CREATE_HTML = 'admin_create_project.html'

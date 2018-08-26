@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Ash's Autograder</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+	<style>
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			background-color: #333333;
+		}
+
+		li {
+			float: left;
+		}
+
+		li a {
+			display: block;
+			color: white;
+			text-align: center;
+			padding: 16px;
+			text-decoration: none;
+		}
+
+		li a:hover{
+			background-color: #111111;
+		}
+	</style>
+</head>
+
+<body>
+	<div class=Navigation style="float:top; padding-left:100px">
+		<h1>Welcome to Ash's Autograder</h1>
+	</div>
+	<div class=Content style="float:top; padding-left:100px">
+		<div class=Welcome>
+			<p>Welcome admin!</p>
+			<p>Create new project below!</p>
+		</div>
+
+		<div class=Logout>
+			<a href={{LOGOUT_URL}}>Logout</a>
+		</div>
+
+		<div class=CreateProject>
+			<form action="" method="post" enctype="multipart/form-data">
+				<input type="text" name="project_name" />
+				<input type="file" name="filename" />
+				<input type="file" name="starter_files" />
+				<input type="file" name="autograder" />
+				<input type="submit" value="Create"/>				
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

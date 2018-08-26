@@ -37,7 +37,7 @@
 	</div>
 	<div class=Content style="float:top; padding-left:100px">
 		<div class=Welcome>
-			<p>Welcome {{username}}!</p>
+			<p>Welcome admin!</p>
 		</div>
 
 		<div class=Logout>
@@ -45,6 +45,11 @@
 		</div>
 
 		<div class=ProjectLinks>
+
+			<div class=Create>
+				<a href={{ADMIN_PROJECTS_CREATE_URL}}>Create new project</a>
+			</div>
+
 			{% for project in projects %}
 				<div class=ProjectLink>
 					<p>{{project['project_id']}}</p>

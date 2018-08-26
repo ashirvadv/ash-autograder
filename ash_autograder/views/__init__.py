@@ -18,3 +18,13 @@ from ash_autograder.views.sign_up import show_sign_up
 from ash_autograder.views.login import show_login
 # /accounts/logout/
 from ash_autograder.views.logout import show_logout
+
+'''
+ADMIN PAGES
+'''
+
+# /admin/projects/
+from ash_autograder.views.admin_projects import show_admin_projects
+
+# /admin/projects/create/
+from ash_autograder.views.admin_create_project import show_admin_create_project

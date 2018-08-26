@@ -16,7 +16,10 @@ CREATE TABLE Email_to_Id(
 
 CREATE TABLE Projects(
 	project_id INTEGER PRIMARY KEY AUTOINCREMENT,
-	project_name VARCHAR(40) NOT NULL
+	project_name VARCHAR(40) NOT NULL, 
+	filename VARCHAR(40) NOT NULL,
+	starter_files VARCHAR(40), 
+	autograder VARCHAR(40)
 );
 
 CREATE TABLE Project_Permissions(

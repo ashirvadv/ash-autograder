@@ -2,12 +2,12 @@ import flask
 from flask import session, redirect, url_for, request
 import ash_autograder
 from ash_autograder.views.Authenticate import authenticate_admin
-from ash_autograder.views.ProjectStore import *
-from ash_autograder.views.urls import DASHBOARD_HTML, DASHBOARD_URL, LOGOUT_URL
+from ash_autograder.views.ProjectStore import get_all_projects
+from ash_autograder.views.urls import *
 
-@ash_autograder.app.route(DASHBOARD_URL, methods=['GET', 'POST'])
-def show_create_project():
-	'''Show create project page.'''
+@ash_autograder.app.route(ADMIN_PROJECTS_URL, methods=['GET'])
+def show_admin_projects():
+	'''Show admin projects page.'''
 
 	authenticated = authenticate_admin()
 
@@ -17,5 +17,6 @@ def show_create_project():
 	projects = get_all_projects()
 	context = {'projects': projects}
 	context['LOGOUT_URL'] = LOGOUT_URL
+	context['ADMIN_PROJECTS_CREATE_URL'] = ADMIN_PROJECTS_CREATE_URL
 
-	return flask.render_template(DASHBOARD_HTML, **context)
+	return flask.render_template(ADMIN_PROJECTS_HTML, **context)
