@@ -5,10 +5,26 @@ from ash_autograder.views.Authenticate import authenticate_admin
 from ash_autograder.views.ProjectStore import *
 from ash_autograder.views.urls import ADMIN_PROJECTS_CREATE_HTML, ADMIN_PROJECTS_CREATE_URL, LOGOUT_URL
 
+import os
+import shutil
+import tempfile
+from ash_autograder.config import UPLOAD_FOLDER
+
 def render_create_project():
 	'''Render create project.'''
 	context = {'LOGOUT_URL': LOGOUT_URL}
 	return flask.render_template(ADMIN_PROJECTS_CREATE_HTML, **context)
+
+def upload_file(proj_num, file):
+	'''Upload file into directory.'''
+	dummy, temp_filename = tempfile.mkstemp()
+	file.save(temp_filename)
+	shutil.move(temp_filename, UPLOAD_FOLDER + '/project_{}/'.format(proj_num) + file.filename)
+
+def create_new_project_folder(id):
+	'''Create new project folder.'''
+	path = UPLOAD_FOLDER + '/project_{}/'.format(id)
+	os.mkdir(path)
 
 def create_new_project(project_name, files):
 	'''Create new project.'''
@@ -16,6 +32,13 @@ def create_new_project(project_name, files):
 		filename = files['filename']
 		starter_files = files['starter_files']
 		autograder = files['autograder']
+		add_new_project(project_name, filename.filename, starter_files.filename, autograder.filename)
+		proj_id = get_project_by_name(project_name)
+		create_new_project_folder(proj_id)
+		upload_file(proj_id, filename)
+		upload_file(proj_id, starter_files)
+		upload_file(proj_id, autograder)
+		return render_create_project()
 	except Exception as e:
 		return render_create_project()
 
@@ -29,6 +52,6 @@ def show_admin_create_project():
 		return authenticated
 
 	if request.method == 'POST':
-		return create_new_project(request.form.project_name, request.files)
+		return create_new_project(request.form['project_name'], request.files)
 
 	return render_create_project()
