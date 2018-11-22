@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Ash's Autograder</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+	<style>
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			background-color: #333333;
+		}
+
+		li {
+			float: left;
+		}
+
+		li a {
+			display: block;
+			color: white;
+			text-align: center;
+			padding: 16px;
+			text-decoration: none;
+		}
+
+		li a:hover{
+			background-color: #111111;
+		}
+	</style>
+</head>
+
+<body>
+	<div class=Navigation style="float:top; padding-left:100px">
+		<h1>Welcome to Ash's Autograder</h1>
+	</div>
+	<div class=Content style="float:top; padding-left:100px">
+		<div class=Welcome>
+			<p>Welcome {{username}}!</p>
+		</div>
+
+		<div class="Logout">
+			<a href={{LOGOUT_URL}}>Logout</a>
+		</div>
+
+		<div class=ProjectLinks>
+			{% for num in projects %}
+				<div class=ProjectLink>
+					<a href=/project/{{num}}>{{num}}</a>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</body>
+
+</html>

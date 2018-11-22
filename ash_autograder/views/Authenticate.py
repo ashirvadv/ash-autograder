@@ -10,6 +10,7 @@ def authenticate_user():
 	else:
 		return redirect(url_for('show_login'))
 
+
 def insert_into_session(user_id, email=None):
 	'''Include this user_id into the session.'''
 	session['logged_in'] = True
@@ -17,10 +18,12 @@ def insert_into_session(user_id, email=None):
 	if email != None:
 		session['username'] = email
 
+
 def remove_elt_from_session(elt):
 	'''Remove elt from session.'''
 	if elt in session:
 		session.pop(elt)
+
 
 def remove_from_session():
 	'''Remove from session.'''
@@ -30,6 +33,7 @@ def remove_from_session():
 	elements.append('username')
 	for elt in elements:
 		remove_elt_from_session(elt)
+
 
 def authenticate_admin():
 	'''
@@ -44,3 +48,4 @@ def authenticate_admin():
 		return None
 	else:
 		return redirect(url_for('show_dashboard'))
+

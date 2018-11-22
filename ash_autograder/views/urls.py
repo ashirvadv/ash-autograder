@@ -28,6 +28,11 @@ PROJECT PAGES
 
 # /projects/
 PROJECTS_URL = '/projects/'
+PROJECTS_HTML = 'projects.html'
+
+# /project/<project_id>/
+PROJECT_URL = '/project/<project_id>/'
+PROJECT_HTML = 'project.html'
 
 
 '''

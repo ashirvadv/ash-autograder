@@ -15,16 +15,25 @@ def render_create_project():
 	context = {'LOGOUT_URL': LOGOUT_URL}
 	return flask.render_template(ADMIN_PROJECTS_CREATE_HTML, **context)
 
+
+def build_project_path(num):
+	'''Build project path.'''
+	result = UPLOAD_FOLDER + '/project_{}/'.format(num)
+	return result
+
+
 def upload_file(proj_num, file):
 	'''Upload file into directory.'''
 	dummy, temp_filename = tempfile.mkstemp()
 	file.save(temp_filename)
-	shutil.move(temp_filename, UPLOAD_FOLDER + '/project_{}/'.format(proj_num) + file.filename)
+	shutil.move(temp_filename, build_project_path(proj_num) + file.filename)
+
 
 def create_new_project_folder(id):
 	'''Create new project folder.'''
-	path = UPLOAD_FOLDER + '/project_{}/'.format(id)
+	path = build_project_path(id)
 	os.mkdir(path)
+
 
 def create_new_project(project_name, files):
 	'''Create new project.'''
@@ -33,7 +42,7 @@ def create_new_project(project_name, files):
 		starter_files = files['starter_files']
 		autograder = files['autograder']
 		add_new_project(project_name, filename.filename, starter_files.filename, autograder.filename)
-		proj_id = get_project_by_name(project_name)
+		proj_id = get_project_id_by_name(project_name)
 		create_new_project_folder(proj_id)
 		upload_file(proj_id, filename)
 		upload_file(proj_id, starter_files)
@@ -41,6 +50,7 @@ def create_new_project(project_name, files):
 		return render_create_project()
 	except Exception as e:
 		return render_create_project()
+
 
 @ash_autograder.app.route(ADMIN_PROJECTS_CREATE_URL, methods=['GET', 'POST'])
 def show_admin_create_project():

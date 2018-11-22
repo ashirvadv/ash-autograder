@@ -8,12 +8,18 @@ CREATE TABLE Users(
 	password VARCHAR(255) NOT NULL
 );
 
+
+-- Email_to_Id is a temporary hack to efficiently retrieve user_id by email
 CREATE TABLE Email_to_Id(
 	email VARCHAR(40),
 	user_id INTEGER NOT NULL,
 	PRIMARY KEY(email)
 );
 
+
+-- filename is the filename of the project specification
+-- starter_files is the filename of the zipped starter files
+-- autograder is the filename of the autograder 
 CREATE TABLE Projects(
 	project_id INTEGER PRIMARY KEY AUTOINCREMENT,
 	project_name VARCHAR(40) NOT NULL, 
@@ -22,6 +28,8 @@ CREATE TABLE Projects(
 	autograder VARCHAR(40)
 );
 
+
+-- This table identifies what user is allowed to access project_id
 CREATE TABLE Project_Permissions(
 	project_id INTEGER,
 	user_id INTEGER,
