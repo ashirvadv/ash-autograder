@@ -38,3 +38,14 @@ def add_new_project(name, filename, starter_files):
 		data.append(starter_files)
 
 	insert_into_table(table_name, columns, data)
+
+
+def update_project_file(project_id, column, data):
+	print('in here')
+	print(column)
+	print(data)
+	table_name = 'Projects'
+	columns = [column]
+	data = [data]
+	condition = 'WHERE project_id = {}'.format(project_id)
+	update_table(table_name, columns, data, condition)

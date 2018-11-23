@@ -19,7 +19,8 @@ def render_create_project():
 
 def build_project_path(num):
 	'''Build project path.'''
-	result = UPLOAD_FOLDER + '/project_{}/'.format(num)
+	result = os.path.join(UPLOAD_FOLDER, 'project_{}'.format(num))
+	# result = UPLOAD_FOLDER + '/project_{}/'.format(num)
 	return result
 
 
@@ -27,7 +28,8 @@ def upload_file(proj_num, file):
 	'''Upload file into directory.'''
 	dummy, temp_filename = tempfile.mkstemp()
 	file.save(temp_filename)
-	shutil.move(temp_filename, build_project_path(proj_num) + file.filename)
+	path = os.path.join(build_project_path(proj_num), file.filename)
+	shutil.move(temp_filename, path)
 
 
 def create_new_project_folder(id):
