@@ -47,9 +47,13 @@
 			<a href=/project/{{num}}/{{starter_files}} download>Project {{num}} Starter Files</a>
 		</div>
 
-		<div class="Score">
-			<p>Best Score: </p>
-		</div>
+		{% if is_admin %}
+			<div class="Admin">
+				<p>Update Spec</p>
+				<p>Update starter files</p>
+				<p>Update autograder</p>
+			</div>
+		{% endif %}
 
 		<div class="Autograder">
 			<a href=/submit/{{num}}>Project {{num}} Autograder</a>

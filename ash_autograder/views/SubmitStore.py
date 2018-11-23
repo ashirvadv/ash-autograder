@@ -29,5 +29,8 @@ def create_submission_table(user_id, project_id):
 def get_all_submissions_for_project(user_id, project_id):
 	'''Return all rows in table for user_id and project_id.'''
 	table_name = build_submission_table_name(user_id, project_id)
-	return retrieve_from_table(table_name, ['*'])
+	if table_exists(table_name):
+		return retrieve_from_table(table_name, ['*'])
+	else:
+		return []
 

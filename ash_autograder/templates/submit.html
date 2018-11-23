@@ -33,7 +33,7 @@
 
 <body>
 	<div class=Navigation style="float:top; padding-left:100px">
-		<h1>Project {{num}} Autograder: {{project_name}}</h1>
+		<h1>Project {{num}} Autograder</h1>
 	</div>
 	<div class=Content style="float:top; padding-left:100px">
 
@@ -43,18 +43,28 @@
 
 		<div class="Score">
 			<p>Best Score: {{best_score}} / 100</p>
-			<p>Submission: {{best_id}}</p>
+			{% if best_id == -1 %}
+				<p>Submission: None</p>
+			{% else %}
+				<p>Submission: {{best_id}}</p>
+			{% endif %}
 		</div>
 
 		<div class="Submissions">
-			{% for submission in submissions %}
+			{% if submissions|length == 0 %}
 				<div class="Submission">
-					<p>Submission: {{submission['submission_id']}}</p>
-					<p>Timestamp: {{submission['time']}}</p>
-					<p>Score: {{submission['score']}}</p>
-					<a href=/submission/{{submission['submission_id']}}>Submission Link</a>
+					<p>You have no submissions for this project.</p>
 				</div>
-			{% endfor %}
+			{% else %}
+				{% for submission in submissions %}
+					<div class="Submission">
+						<p>Submission: {{submission['submission_id']}}</p>
+						<p>Timestamp: {{submission['time']}}</p>
+						<p>Score: {{submission['score']}}</p>
+						<a href=/submission/{{submission['submission_id']}}>Submission Link</a>
+					</div>
+				{% endfor %}
+			{% endif %}
 		</div>
 
 	</div>

@@ -1,12 +1,11 @@
 import flask
 from flask import session, redirect, url_for, request
 import ash_autograder
-from ash_autograder.views.Authenticate import authenticate_user
+from ash_autograder.views.Authenticate import authenticate_user, authenticate_admin
 from ash_autograder.views.ProjectStore import *
 from ash_autograder.views.urls import LOGOUT_URL, PROJECT_URL, PROJECT_HTML
 from ash_autograder.config import UPLOAD_FOLDER
 import os
-
 
 
 @ash_autograder.app.route(os.path.join(PROJECT_URL, '<path:filename>'))
@@ -25,10 +24,16 @@ def show_project(project_id):
 	if authenticated != None:
 		return authenticated
 
+	if authenticate_admin() != None:
+		is_admin = False
+	else:
+		is_admin = True
+
 	username = session['username']
 	user_id = session['user_id']
 
 	context = {'username': username, 'user_id': user_id, 'num': project_id}
+	context['is_admin'] = is_admin
 
 	project = get_project_by_id(project_id)
 

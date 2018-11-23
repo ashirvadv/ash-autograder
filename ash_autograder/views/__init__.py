@@ -36,6 +36,16 @@ from ash_autograder.views.project import show_project, download_file
 
 
 '''
+AUTOGRADER PAGES
+'''
+# /submit/<project_id>/
+from ash_autograder.views.submit import show_submit
+
+# /submission/<submit_id>/
+# from ash_autograder.views.projects import show_projects
+
+
+'''
 ADMIN PAGES
 '''
 

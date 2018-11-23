@@ -41,11 +41,13 @@ def create_new_project(project_name, files):
 	try:
 		filename = files['filename']
 		starter_files = files['starter_files']
-		add_new_project(project_name, filename.filename, starter_files.filename)
+		autograder = files['autograder']
+		add_new_project(project_name, filename.filename, starter_files.filename, autograder.filename)
 		proj_id = get_project_id_by_name(project_name)
 		create_new_project_folder(proj_id)
 		upload_file(proj_id, filename)
 		upload_file(proj_id, starter_files)
+		upload_file(proj_id, autograder)
 		return render_create_project()
 	except Exception as e:
 		return render_create_project()
