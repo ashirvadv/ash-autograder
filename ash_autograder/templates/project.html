@@ -41,10 +41,18 @@
 			<a href={{LOGOUT_URL}}>Logout</a>
 		</div>
 
-		<div class="Submissions">
-			{% for submission in submissions %}
-				<a href=/submission/{{user_id}}/{{num}}/{{submission}}>Submission: {{submission}}</a>
-			{% endfor %}
+		<div class="Spec">
+			<a href=/project/{{num}}/{{spec_filename}} download>Project {{num}} Specification</a>
+			<br>
+			<a href=/project/{{num}}/{{starter_files}} download>Project {{num}} Starter Files</a>
+		</div>
+
+		<div class="Score">
+			<p>Best Score: </p>
+		</div>
+
+		<div class="Autograder">
+			<p>Link to Autograder</p>
 		</div>
 	</div>
 </body>

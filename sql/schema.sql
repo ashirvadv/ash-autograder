@@ -19,13 +19,11 @@ CREATE TABLE Email_to_Id(
 
 -- filename is the filename of the project specification
 -- starter_files is the filename of the zipped starter files
--- autograder is the filename of the autograder 
 CREATE TABLE Projects(
 	project_id INTEGER PRIMARY KEY AUTOINCREMENT,
 	project_name VARCHAR(40) NOT NULL, 
 	filename VARCHAR(40) NOT NULL,
-	starter_files VARCHAR(40), 
-	autograder VARCHAR(40)
+	starter_files VARCHAR(40)
 );
 
 

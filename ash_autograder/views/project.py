@@ -3,7 +3,17 @@ from flask import session, redirect, url_for, request
 import ash_autograder
 from ash_autograder.views.Authenticate import authenticate_user
 from ash_autograder.views.ProjectStore import *
-from ash_autograder.views.urls import LOGOUT_URL, PROJECT_URL
+from ash_autograder.views.urls import LOGOUT_URL, PROJECT_URL, PROJECT_HTML
+from ash_autograder.config import UPLOAD_FOLDER
+import os
+
+
+
+@ash_autograder.app.route(os.path.join(PROJECT_URL, '<path:filename>'))
+def download_file(project_id, filename):
+	'''Download file.'''
+	path = os.path.join(UPLOAD_FOLDER, 'project_{}'.format(str(project_id)))
+	return flask.send_from_directory(path, filename, as_attachment=True)
 
 
 @ash_autograder.app.route(PROJECT_URL, methods=['GET'])
@@ -18,10 +28,14 @@ def show_project(project_id):
 	username = session['username']
 	user_id = session['user_id']
 
-	projects = get_all_projects(user_id)
+	context = {'username': username, 'user_id': user_id, 'num': project_id}
 
-	context = {'username': username, 'user_id': user_id}
+	project = get_project_by_id(project_id)
+
+	context['project_name'] = project['project_name']
+	context['spec_filename'] = project['filename']
+	context['starter_files'] = project['starter_files']
+	context['autograder'] = project['autograder']
 	context['LOGOUT_URL'] = LOGOUT_URL
-	context['projects'] = projects
 
-	return flask.render_template(PROJECT_URL, **context)
+	return flask.render_template(PROJECT_HTML, **context)

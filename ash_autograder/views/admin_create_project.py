@@ -10,6 +10,7 @@ import shutil
 import tempfile
 from ash_autograder.config import UPLOAD_FOLDER
 
+
 def render_create_project():
 	'''Render create project.'''
 	context = {'LOGOUT_URL': LOGOUT_URL}
@@ -32,7 +33,7 @@ def upload_file(proj_num, file):
 def create_new_project_folder(id):
 	'''Create new project folder.'''
 	path = build_project_path(id)
-	os.mkdir(path)
+	os.makedirs(path)
 
 
 def create_new_project(project_name, files):

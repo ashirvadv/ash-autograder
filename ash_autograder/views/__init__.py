@@ -32,7 +32,7 @@ PROJECT PAGES
 from ash_autograder.views.projects import show_projects
 
 # /project/<project_id>/
-from ash_autograder.views.project import show_project
+from ash_autograder.views.project import show_project, download_file
 
 
 '''
