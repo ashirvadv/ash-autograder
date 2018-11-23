@@ -35,7 +35,6 @@ def show_project(project_id):
 	context['project_name'] = project['project_name']
 	context['spec_filename'] = project['filename']
 	context['starter_files'] = project['starter_files']
-	context['autograder'] = project['autograder']
 	context['LOGOUT_URL'] = LOGOUT_URL
 
 	return flask.render_template(PROJECT_HTML, **context)

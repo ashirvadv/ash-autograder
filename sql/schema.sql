@@ -42,6 +42,7 @@ Each submissions table should look roughly like this:
 CREATE TABLE user_projectnum_submissions(
 	submission_id INTEGER NOT NULL,
 	time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	score REAL, 
 	PRIMARY KEY(submission_id)
 );
 */

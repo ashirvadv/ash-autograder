@@ -40,9 +40,11 @@ AUTOGRADER PAGES
 '''
 # /submit/<project_id>/
 SUBMIT_URL = '/submit/<project_id>/'
+SUBMIT_HTML = 'submit.html'
 
 # /submission/<submit_id>/
 SUBMISSION_URL = '/submission/<submit_id>/'
+SUBMISSION_HTML = 'submission.html'
 
 
 '''

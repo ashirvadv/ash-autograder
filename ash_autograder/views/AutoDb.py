@@ -2,9 +2,22 @@ from ash_autograder.model import get_db
 from ash_autograder.views.Exceptions import *
 from ash_autograder.views.SQLExceptions import *
 
+
+def table_exists(table_name):
+	'''Return true if table_name exists.'''
+	database = get_db()
+	cursor = database.cursor()
+	query = 'SELECT count(*) FROM sqlite_master WHERE type="table" AND name="{}"'.format(table_name)
+	result = cursor.execute(query)
+	print('result is: ')
+	print(result)
+	return result == 1
+
+
 def retrieve_from_table(table_name, columns):
 	'''Retrieve all rows of given columns from the table.'''
 	return retrieve_from_table_condition(table_name, columns, None)
+
 
 def retrieve_from_table_condition(table_name, columns, condition):
 	'''Retrieve all rows of given columns from table given condition.'''
@@ -20,6 +33,7 @@ def retrieve_from_table_condition(table_name, columns, condition):
 	result = rows.fetchall()
 	return result
 
+
 def build_select_command(table_name, columns, condition):
 	'''Build the select query.'''
 	if table_name == None:
@@ -34,6 +48,7 @@ def build_select_command(table_name, columns, condition):
 	if condition != None:
 		query += ' WHERE ' + condition
 	return query
+
 
 def retrieve_max_from_table(table_name, column, condition=None):
 	'''Retrieve the maximum on a column from a table.'''
@@ -65,6 +80,7 @@ def build_max_command(table_name, column, condition=None):
 		query += ' WHERE ' + condition
 	return query
 
+
 def insert_into_table(table_name, columns, data):
 	'''Insert the following data into table_name.'''
 	database = get_db()
@@ -75,6 +91,7 @@ def insert_into_table(table_name, columns, data):
 	except Exception as e:
 		print(e)
 	database.commit()
+
 
 def build_insert_command(table_name, columns, data):
 	'''Build the insert query.'''
@@ -92,9 +109,11 @@ def build_insert_command(table_name, columns, data):
 	query += '", "'.join(data) + '")'
 	return query
 
+
 def update_table(table_name, columns, data):
 	'''Update all rows in a table.'''
 	update_table(table_name, columns, data, None)
+
 
 def update_table(table_name, columns, data, condition):
 	'''Update a row in the given table that satisfy the condition.'''
@@ -103,6 +122,7 @@ def update_table(table_name, columns, data, condition):
 	query = build_update_command(table_name, columns, data, condition)
 	cursor.execute(query)
 	database.commit()
+
 
 def build_update_command(table_name, columns, data, condition):
 	'''Build the update query.'''

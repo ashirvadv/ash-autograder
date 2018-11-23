@@ -27,7 +27,7 @@ def get_project_id_by_name(name):
 	return result[0]['project_id']
 
 
-def add_new_project(name, filename, starter_files, autograder):
+def add_new_project(name, filename, starter_files):
 	'''Add new project to database.'''
 	table_name = 'Projects'
 	columns = ['project_name', 'filename']
@@ -36,9 +36,5 @@ def add_new_project(name, filename, starter_files, autograder):
 	if starter_files != None:
 		columns.append('starter_files')
 		data.append(starter_files)
-
-	if autograder != None:
-		columns.append('autograder')
-		data.append(autograder)
 
 	insert_into_table(table_name, columns, data)
